@@ -64,6 +64,7 @@ public class TestLRUCashe {
 
 
     }
+
     @Test
     public void testAdded2(){
         Map<String, LRUCashe.Node> map=lruCashe1.map;
@@ -99,7 +100,7 @@ public class TestLRUCashe {
 
         assert (map.containsKey("vv")&&map.containsKey("uu")&&map.containsKey("ii")&&map.containsKey("mm"));
 
-        lruCashe.putNod("hh",null);//uu,ii,mm,hh
+        lruCashe1.putNod("hh",null);//uu,ii,mm,hh
         assert (map.containsKey("uu"));
         assert (map.containsKey("ii"));
         assert (map.containsKey("mm"));
@@ -114,5 +115,6 @@ public class TestLRUCashe {
 
 
     }
+
 
 }
