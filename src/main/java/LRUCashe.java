@@ -104,6 +104,7 @@ public class LRUCashe {
         }
     }
     Node getNod(String key){
+        if(map.containsKey(key)){
         Node refreshed = map.get(key);
         if(refreshed.equals(last)){
             ;}
@@ -138,5 +139,12 @@ public class LRUCashe {
         }
 
         return refreshed;}
+
+    else {  System.out.println("no sach key");
+            return null;}
+
+    }
+
+
     }
 
