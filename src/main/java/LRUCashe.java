@@ -52,6 +52,7 @@ public class LRUCashe {
                     ;}
                 else if (refreshed.equals(first)){
                     last.next=refreshed;
+                    refreshed.previous=last;
                     last=refreshed;
                     Node tobe1st=first.next;
                     tobe1st.previous=null;
@@ -100,6 +101,7 @@ public class LRUCashe {
             ;}
         else if (refreshed.equals(first)){
             last.next=refreshed;
+            refreshed.previous=last;
             last=refreshed;
             Node tobe1st=first.next;
             tobe1st.previous=null;
