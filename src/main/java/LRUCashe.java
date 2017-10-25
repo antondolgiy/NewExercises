@@ -51,12 +51,22 @@ public class LRUCashe {
                 if(refreshed.equals(last)){
                     ;}
                 else if (refreshed.equals(first)){
-                    last.next=refreshed;
-                    refreshed.previous=last;
-                    last=refreshed;
+                    //make link from current last element to new last elment
+                    last.next=first;
+                    //make link from new to carrent last element
+                    first.previous=last;
+                    //find what element will be first
                     Node tobe1st=first.next;
+                    //as future first element it should have previous
                     tobe1st.previous=null;
-                    first=tobe1st;}
+                    //and future last element should not have next
+                    first.next=null;
+                    //declare first as last
+                    last=first;
+                    //and declare tobe1st as first
+
+                    first=tobe1st;
+                }
                 else{
                     refreshed.previous.next=refreshed.next;
                     refreshed.next.previous=refreshed.previous;
@@ -92,20 +102,30 @@ public class LRUCashe {
             }
 
         }
-
-
     }
     Node getNod(String key){
         Node refreshed = map.get(key);
         if(refreshed.equals(last)){
             ;}
         else if (refreshed.equals(first)){
-            last.next=refreshed;
-            refreshed.previous=last;
-            last=refreshed;
+
+           //make link from current last element to new last elment
+            last.next=first;
+           //make link from new to carrent last element
+            first.previous=last;
+            //find what element will be first
             Node tobe1st=first.next;
+            //as future first element it should have previous
             tobe1st.previous=null;
+            //and future last element should not have next
+            first.next=null;
+            //declare first as last
+            last=first;
+            //and declare tobe1st as first
+
             first=tobe1st;}
+
+
         else{
             refreshed.previous.next=refreshed.next;
             refreshed.next.previous=refreshed.previous;
@@ -117,6 +137,6 @@ public class LRUCashe {
             last=refreshed;
         }
 
-        return refreshed;
+        return refreshed;}
     }
-}
+
