@@ -1,22 +1,26 @@
+
+
 import java.util.HashMap;
 
 /**
  * Created by Anton on 24.10.2017.
  */
-public class LRUCashe {
+public class LRUCashe<K,V> {
 
-    HashMap<String,Node> map=new HashMap();
+    HashMap<K,Node> map=new HashMap();
+
+
     int capacity;
     //first=old,first candidate to b deleted; last=fresh,"just used"
     Node first;
     Node last;
     class Node{
         Node previous;
-        String key;
-        String value;
+        K key;
+        V value;
         Node next;
 
-        public Node(Node previous,String key,String value,Node next ){
+        public Node(Node previous,K key,V value,Node next ){
             this.previous=previous;
             this.key=key;
             this.value=value;
@@ -28,6 +32,10 @@ public class LRUCashe {
             return "NODE(key:"+key+","+"value:"+value+")";
         }
 
+          K getKey(){
+             return this.key;}
+
+
     }
     LRUCashe(int capacity){
         if(capacity<3){
@@ -36,7 +44,7 @@ public class LRUCashe {
         }
         this.capacity=capacity;
     }
-    public void putNod(String key, String value) {
+    public void putNod(K key, V value) {
         if (map.size() == 0) {
             Node nod = new Node(null, key, value, null);
             map.put(key, nod);
@@ -48,9 +56,15 @@ public class LRUCashe {
 
             if (map.containsKey(key)) {
                 Node refreshed = map.get(key);
-                if(refreshed.equals(last)){
+                if(refreshed==last){
+                    // should cashed value be replaced with new value? if yeas then
+                    refreshed.value=value;
+
                     ;}
-                else if (refreshed.equals(first)){
+                else if (refreshed==first){
+                    // should cashed value be replaced with new value? if yeas then
+                    refreshed.value=value;
+
                     //make link from current last element to new last elment
                     last.next=first;
                     //make link from new to carrent last element
@@ -68,6 +82,9 @@ public class LRUCashe {
                     first=tobe1st;
                 }
                 else{
+                    // should cashed value be replaced with new value? if yeas then
+                    refreshed.value=value;
+
                     refreshed.previous.next=refreshed.next;
                     refreshed.next.previous=refreshed.previous;
 
@@ -103,12 +120,12 @@ public class LRUCashe {
 
         }
     }
-    Node getNod(String key){
+    Node getNod(K key){
         if(map.containsKey(key)){
         Node refreshed = map.get(key);
-        if(refreshed.equals(last)){
+        if(refreshed==last){
             ;}
-        else if (refreshed.equals(first)){
+        else if (refreshed==first){
 
            //make link from current last element to new last elment
             last.next=first;
