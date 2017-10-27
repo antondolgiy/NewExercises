@@ -32,8 +32,7 @@ public class LRUCashe<K,V> {
             return "NODE(key:"+key+","+"value:"+value+")";
         }
 
-          K getKey(){
-             return this.key;}
+
 
 
     }
