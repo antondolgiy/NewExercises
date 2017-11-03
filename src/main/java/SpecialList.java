@@ -109,10 +109,10 @@ import java.util.NoSuchElementException;
         }
 
         public void printAllvalues(){
-            this.printAllNodeElement(this.head);
+            printAllNodeElement(head);
         }
         public void swapAll(){
-            this.SwapAllNodeElement(this.head);
+            SwapAllNodeElement(head);
 
         }
 
@@ -131,18 +131,14 @@ import java.util.NoSuchElementException;
             list.addElement("cc");
             list.addElement("dd");
 
-            System.out.println(list.size);
             list.printAllvalues();
             System.out.println("************");
 
             list.swapAll();
 
             System.out.println("************");
-            System.out.println(list.size);
+
             list.printAllvalues();
-
-
-
 
         }
 
