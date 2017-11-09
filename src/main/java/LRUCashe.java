@@ -51,20 +51,12 @@ public class LRUCashe<K, V> {
             if (map.containsKey(key)) {
                 Node refreshed = map.get(key);
                 if (refreshed == last) {
-                    // should cashed value be replaced with new value? if yeas then
+
                     refreshed.value = value;
 
-                    ;
+
                 } else if (refreshed == first) {
-                    /*
-                    refreshed.value=value;
-                    first = refreshed.next;
-                    first.previous = null;
-                    refreshed.next=null;
-                    refreshed.previous = last;
-                    last=refreshed;
-                    */
-                    // should cashed value be replaced with new value? if yeas then
+
                     refreshed.value = value;
 
                     //make link from current last element to new last elment
@@ -83,7 +75,7 @@ public class LRUCashe<K, V> {
 
                     first = tobe1st;
                 } else {
-                    // should cashed value be replaced with new value? if yeas then
+
                     refreshed.value = value;
 
                     refreshed.previous.next = refreshed.next;
@@ -91,7 +83,7 @@ public class LRUCashe<K, V> {
 
                     refreshed.previous = last;
                     refreshed.next = null;
-                    //вот этой одной строчкой ссылку забыл перекинуть -  и жЁпа
+
                     last.next = refreshed;
                     last = refreshed;
                 }
@@ -127,19 +119,19 @@ public class LRUCashe<K, V> {
                 ;
             } else if (refreshed == first) {
 
-                //make link from current last element to new last elment
+
                 last.next = first;
-                //make link from new to carrent last element
+
                 first.previous = last;
-                //find what element will be first
+
                 Node tobe1st = first.next;
-                //as future first element it should have previous
+
                 tobe1st.previous = null;
-                //and future last element should not have next
+
                 first.next = null;
-                //declare first as last
+
                 last = first;
-                //and declare tobe1st as first
+
 
                 first = tobe1st;
             } else {
@@ -148,7 +140,7 @@ public class LRUCashe<K, V> {
 
                 refreshed.previous = last;
                 refreshed.next = null;
-                //вот этой одной строчкой ссылку забыл перекинуть -  и жЁпа
+
                 last.next = refreshed;
                 last = refreshed;
             }

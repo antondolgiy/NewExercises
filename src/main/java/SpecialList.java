@@ -71,6 +71,7 @@ import java.util.NoSuchElementException;
             if(node.previous==null) System.out.println(node.element);
             if(node.next!=null){
                 System.out.println(node.next.element);
+                
                 printAllNodeElement(node.next);
             }
 
@@ -92,8 +93,10 @@ import java.util.NoSuchElementException;
                         shadow.next=shadow.previous;
                         shadow.previous=temp;
                     }
+
                 }
-                SwapAllNodeElement(node.next);
+                node=node.next;
+                SwapAllNodeElement(node);
             }
             else {
                 Node shadow=node.previous;
