@@ -26,7 +26,7 @@ public class TestLRUCashe {
     @Test
     public void testAdded(){
         // refresh from first by put
-        lruCashe.putNod("aa",null);//bb,cc,aa
+        lruCashe.putNod("aa","dasAA");//bb,cc,aa
         assert (lruCashe.map.containsKey("bb")&&lruCashe.map.containsKey("cc")&&lruCashe.map.containsKey("aa"));
         lruCashe.putNod("zz",null);//cc,aa,zz
         assert (lruCashe.map.containsKey("cc")&&lruCashe.map.containsKey("aa")&&lruCashe.map.containsKey("zz"));
@@ -113,6 +113,23 @@ public class TestLRUCashe {
         lruCashe1.putNod("nn",null);//mm,jj,pp,nn
         assert (map.containsKey("mm")&&map.containsKey("jj")&&map.containsKey("pp")&&map.containsKey("nn"));
 
+
+    }
+    @Test
+    public void anotherTest(){
+        LRUCashe <Integer,String> lruCashe3=new LRUCashe(4);
+        lruCashe3.putNod(new Integer(123),"bubd");
+        lruCashe3.putNod(618,"vbnbvbn");
+        lruCashe3.putNod(619,"dddd");
+        lruCashe3.putNod(123,"dafaq");
+        lruCashe3.putNod(618,"dfdfdffff");
+        lruCashe3.putNod(233,"fff");
+        lruCashe3.putNod(659,"fffff");
+        System.out.println(lruCashe3.getNod(123));
+        System.out.println(lruCashe3.getNod(618));
+        System.out.println(lruCashe3.getNod(619));
+        System.out.println(lruCashe3.getNod(659));
+        System.out.println(lruCashe3.getNod(233));
 
     }
 

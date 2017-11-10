@@ -71,7 +71,7 @@ import java.util.NoSuchElementException;
             if(node.previous==null) System.out.println(node.element);
             if(node.next!=null){
                 System.out.println(node.next.element);
-                
+
                 printAllNodeElement(node.next);
             }
 
