@@ -112,12 +112,11 @@ public class LRUCashe<K, V> {
         }
     }
 
-    Node getNod(K key) {
+    public Node getNod(K key) {
         if (map.containsKey(key)) {
             Node refreshed = map.get(key);
-            if (refreshed == last) {
-                ;
-            } else if (refreshed == first) {
+
+        if (refreshed == first) {
 
 
                 last.next = first;
@@ -134,7 +133,8 @@ public class LRUCashe<K, V> {
 
 
                 first = tobe1st;
-            } else {
+            }
+        else if(refreshed!=last){
                 refreshed.previous.next = refreshed.next;
                 refreshed.next.previous = refreshed.previous;
 
