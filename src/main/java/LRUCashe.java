@@ -7,11 +7,11 @@ import java.util.HashMap;
  */
 public class LRUCashe<K, V> {
 
-    HashMap<K, Node> map = new HashMap();
-    int capacity;
+    private HashMap<K, Node> map = new HashMap<K,Node>();
+    private int capacity;
     //first=old,first candidate to b deleted; last=fresh,"just used"
-    Node first;
-    Node last;
+    private Node first;
+    private Node last;
 
     class Node {
         Node previous;
@@ -26,10 +26,6 @@ public class LRUCashe<K, V> {
             this.next = next;
         }
 
-        @Override
-        public String toString() {
-            return "NODE(key:" + key + "," + "value:" + value + ")";
-        }
     }
 
     public LRUCashe(int capacity) {
@@ -40,7 +36,7 @@ public class LRUCashe<K, V> {
         this.capacity = capacity;
     }
 
-    public void putNod(K key, V value) {
+    public void put(K key, V value) {
         if (map.size() == 0) {
             Node nod = new Node(null, key, value, null);
             map.put(key, nod);
@@ -112,11 +108,11 @@ public class LRUCashe<K, V> {
         }
     }
 
-    public Node getNod(K key) {
+    public V get(K key) {
         if (map.containsKey(key)) {
             Node refreshed = map.get(key);
 
-        if (refreshed == first) {
+            if (refreshed == first) {
 
 
                 last.next = first;
@@ -133,8 +129,7 @@ public class LRUCashe<K, V> {
 
 
                 first = tobe1st;
-            }
-        else if(refreshed!=last){
+            } else if (refreshed != last) {
                 refreshed.previous.next = refreshed.next;
                 refreshed.next.previous = refreshed.previous;
 
@@ -145,7 +140,7 @@ public class LRUCashe<K, V> {
                 last = refreshed;
             }
 
-            return refreshed;
+            return refreshed.value;
         } else {
             System.out.println("no sach key");
             return null;
