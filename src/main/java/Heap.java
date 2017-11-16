@@ -8,13 +8,13 @@ public class Heap {
 
 
     class Node {
-        String element;
+        Comparable element;
         int position;
         int leftchild;
         int rightchild;
         int parent;
 
-        Node(String element) {
+        Node(Comparable element) {
             this.element = element;
             position = list.size();
             leftchild = 2 * position + 1;
@@ -24,20 +24,20 @@ public class Heap {
 
         @Override
         public String toString() {
-            return element + "." + position;
+            return element + "(" + position+")";
         }
 
 
     }
 
-    public void add(String element) {
+    public void add(Comparable element) {
         Node node = new Node(element);
 
         list.add(node);
 
         if (node.position > 0) {
             while (node.parent >= 0 && node.element.compareTo(list.get(node.parent).element) < 0) {
-                String temp = node.element;
+                Comparable temp = node.element;
                 node.element = list.get(node.parent).element;
                 list.get(node.parent).element = temp;
                 node = list.get(node.parent);
@@ -48,7 +48,7 @@ public class Heap {
 
     }
 
-    public String getRootElement() {
+    public Comparable getRootElement() {
         return list.get(0).element;
     }
 
@@ -56,7 +56,8 @@ public class Heap {
     public static void main(String[] args) {
 
         Heap heap = new Heap();
-        heap.add("oo");
+
+        heap.add("uu");
         System.out.println(heap.list);
         heap.add("zz");
         System.out.println(heap.list);
@@ -64,7 +65,7 @@ public class Heap {
         System.out.println(heap.list);
         heap.add("yy");
         System.out.println(heap.list);
-        heap.add("aa");
+        heap.add("kk");
         System.out.println(heap.list);
         heap.add("gg");
         System.out.println(heap.list);
@@ -72,13 +73,14 @@ public class Heap {
         System.out.println(heap.list);
         heap.add("cc");
         System.out.println(heap.list);
-        heap.add("a");
+        heap.add("aa");
         System.out.println(heap.list);
         heap.add("bb");
         System.out.println(heap.list);
         heap.add("dd");
         System.out.println(heap.list);
-        heap.add("bb");
+        heap.add("jj");
+        System.out.println(heap.list);
         System.out.println(heap.list);
         System.out.println(heap.getRootElement());
     }
