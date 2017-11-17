@@ -3,13 +3,13 @@ import java.util.ArrayList;
 /**
  * Created by Anton on 16.11.2017.
  */
-public class Heap {
+public class Heap<T> {
 
 
     private ArrayList<Comparable> list = new ArrayList<Comparable>();
 
 
-    public void add(Comparable element) {
+    public void add(Comparable<T> element) {
 
 
         list.add(element);
@@ -70,11 +70,12 @@ public class Heap {
 
     public static void main(String[] args) {
 
-        Heap heap = new Heap();
+        Heap<Integer> heap = new Heap();
 
         for (int i = 0; i <10 ; i++) {
             heap.add((int)(Math.random()*99));
         }
+
 
         for (int i = 0; i <11 ; i++) {
             System.out.println(heap.getMin());
