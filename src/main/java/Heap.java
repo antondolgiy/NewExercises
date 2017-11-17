@@ -4,52 +4,67 @@ import java.util.ArrayList;
  * Created by Anton on 16.11.2017.
  */
 public class Heap {
-    private ArrayList<Node> list = new ArrayList<Node>();
 
 
-    class Node {
-        Comparable element;
-        int position;
-        int leftchild;
-        int rightchild;
-        int parent;
+    private ArrayList<Comparable> list = new ArrayList<Comparable>();
 
-        Node(Comparable element) {
-            this.element = element;
-            position = list.size();
-            leftchild = 2 * position + 1;
-            rightchild = 2 * position + 2;
-            parent = (position - 1) / 2;
-        }
-
-        @Override
-        public String toString() {
-            return element + "(" + position+")";
-        }
-
-
-    }
 
     public void add(Comparable element) {
-        Node node = new Node(element);
 
-        list.add(node);
 
-        if (node.position > 0) {
-            while (node.parent >= 0 && node.element.compareTo(list.get(node.parent).element) < 0) {
-                Comparable temp = node.element;
-                node.element = list.get(node.parent).element;
-                list.get(node.parent).element = temp;
-                node = list.get(node.parent);
+        list.add(element);
+        int position = list.size() - 1;
+        int parent = (position - 1) / 2;
+        while (position > 0 && list.get(position).compareTo(list.get(parent)) < 0) {
+            Comparable temp = list.get(position);
+            list.set(position, list.get(parent));
+            list.set(parent, temp);
+            position = parent;
+            parent = (position - 1) / 2;
+        }
+    }
 
+    public void heapify(int i) {
+
+        int leftch;
+        int rightch;
+        int min;
+
+
+        while (true) {
+            min = i;
+            leftch = 2 * i + 1;
+            rightch = 2 * i + 2;
+
+
+            if (leftch < list.size() && list.get(leftch).compareTo(list.get(min)) < 0) {
+
+                min = leftch;
             }
+            if (rightch < list.size() && list.get(rightch).compareTo(list.get(min)) < 0) {
 
+                min = rightch;
+            }
+            if (min == i) {
+                break;
+            }
+            Comparable temp = list.get(min);
+            list.set(min, list.get(i));
+            list.set(i, temp);
+            i = min;
         }
 
     }
 
-    public Comparable getRootElement() {
-        return list.get(0).element;
+    public Comparable getMin() {
+        if (list.size() > 0) {
+            Comparable result = list.get(0);
+            list.set(0, list.get(list.size() - 1));
+            list.remove(list.size() - 1);
+            heapify(0);
+
+            return result;
+        } else return null;
     }
 
 
@@ -57,32 +72,15 @@ public class Heap {
 
         Heap heap = new Heap();
 
-        heap.add("uu");
-        System.out.println(heap.list);
-        heap.add("zz");
-        System.out.println(heap.list);
-        heap.add("ff");
-        System.out.println(heap.list);
-        heap.add("yy");
-        System.out.println(heap.list);
-        heap.add("kk");
-        System.out.println(heap.list);
-        heap.add("gg");
-        System.out.println(heap.list);
-        heap.add("dd");
-        System.out.println(heap.list);
-        heap.add("cc");
-        System.out.println(heap.list);
-        heap.add("aa");
-        System.out.println(heap.list);
-        heap.add("bb");
-        System.out.println(heap.list);
-        heap.add("dd");
-        System.out.println(heap.list);
-        heap.add("jj");
-        System.out.println(heap.list);
-        System.out.println(heap.list);
-        System.out.println(heap.getRootElement());
+        for (int i = 0; i <10 ; i++) {
+            heap.add((int)(Math.random()*99));
+        }
+
+        for (int i = 0; i <11 ; i++) {
+            System.out.println(heap.getMin());
+        }
+
+
     }
 
 
