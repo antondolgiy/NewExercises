@@ -68,9 +68,12 @@ public class Heap<T> {
     }
 
 
+
+
     public static void main(String[] args) {
 
         Heap<Integer> heap = new Heap();
+
 
         for (int i = 0; i <10 ; i++) {
             heap.add((int)(Math.random()*99));

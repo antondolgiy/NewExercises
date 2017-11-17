@@ -1,9 +1,9 @@
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
+
 
 /**
  * Created by Anton on 25.10.2017.
@@ -11,111 +11,98 @@ import java.util.Map;
 
 public class TestLRUCashe {
 
-    LRUCashe lruCashe=new LRUCashe(3);
-    LRUCashe lruCashe1=new LRUCashe(4);
 
-    {
-        lruCashe.putNod("aa",null);
-        lruCashe.putNod("bb",null);
-        lruCashe.putNod("cc",null);
-
-        lruCashe1.putNod("aa",null);
-        lruCashe1.putNod("bb",null);
-        lruCashe1.putNod("cc",null);
-    }
     @Test
-    public void testAdded(){
-        // refresh from first by put
-        lruCashe.putNod("aa","dasAA");//bb,cc,aa
-        assert (lruCashe.map.containsKey("bb")&&lruCashe.map.containsKey("cc")&&lruCashe.map.containsKey("aa"));
-        lruCashe.putNod("zz",null);//cc,aa,zz
-        assert (lruCashe.map.containsKey("cc")&&lruCashe.map.containsKey("aa")&&lruCashe.map.containsKey("zz"));
-        // refresh from first by get
-        lruCashe.getNod("cc");//aa,zz,cc
-        assert (lruCashe.map.containsKey("aa")&&lruCashe.map.containsKey("zz")&&lruCashe.map.containsKey("cc"));
-        //put the same
-        lruCashe.putNod("xx",null);//zz,cc,xx
-        assert (lruCashe.map.containsKey("zz")&&lruCashe.map.containsKey("cc")&&lruCashe.map.containsKey("xx"));
-        lruCashe.putNod("xx",null);//zz,cc,xx
-        //get the last
-        lruCashe.getNod("xx");
-        lruCashe.getNod("xx");
 
-        assert (lruCashe.map.containsKey("zz")&&lruCashe.map.containsKey("cc")&&lruCashe.map.containsKey("xx"));
-        lruCashe.putNod("uu",null);//cc,xx,uu
-        lruCashe.putNod("vv",null);//xx,uu,vv
-        assert (lruCashe.map.containsKey("xx")&&lruCashe.map.containsKey("uu")&&lruCashe.map.containsKey("vv"));
+    public void testPut() {
+        LRUCashe cashe = new LRUCashe(4);
+        cashe.put("a", "A");
+        cashe.put("b", "B");
+        cashe.put("c", "C");
+        cashe.put("d", "D");
 
-        //refresh from mid by get
-        lruCashe.getNod("uu");//xx,vv,uu
-        lruCashe.putNod("ii",null);//vv,uu,ii
-        lruCashe.putNod("mm",null);//uu,ii,mm
+        assertEquals("A", cashe.get("a"));
+        assertEquals("B", cashe.get("b"));
+        assertEquals("C", cashe.get("c"));
+        assertEquals("D", cashe.get("d"));
 
-        assert (lruCashe.map.containsKey("uu")&&lruCashe.map.containsKey("ii")&&lruCashe.map.containsKey("mm"));
-        lruCashe.putNod("hh",null);//ii,mm,hh
-        assert (lruCashe.map.containsKey("ii")&&lruCashe.map.containsKey("mm")&&lruCashe.map.containsKey("hh"));
-        //refresh from mid by put
-        lruCashe.putNod("mm",null);//ii,hh,mm
-        lruCashe.putNod("jj",null);//hh,mm,jj
-        lruCashe.putNod("pp",null);//mm,jj,pp
-        assert (lruCashe.map.containsKey("mm")&&lruCashe.map.containsKey("jj")&&lruCashe.map.containsKey("pp"));
-        lruCashe.putNod("nn",null);
-        assert (lruCashe.map.containsKey("jj")&&lruCashe.map.containsKey("pp")&&lruCashe.map.containsKey("nn"));
+        cashe.put("e", "EE");
+        assertEquals(null, cashe.get("a"));
+        assertEquals("EE", cashe.get("e"));
 
+        cashe.put("f", "FF");
+        assertEquals(null, cashe.get("b"));
+        assertEquals("FF", cashe.get("f"));
+
+
+    }
+
+    public void testRemove() {
+        LRUCashe cashe = new LRUCashe(4);
+        cashe.put("a", "A");
+        cashe.put("b", "B");
+        cashe.put("c", "C");
+        cashe.put("d", "D");
+
+        assertEquals("A", cashe.removeFirst());
+        assertEquals("B", cashe.removeFirst());
+        assertEquals("C", cashe.removeFirst());
+        assertEquals("D", cashe.removeFirst());
+        assertEquals(null, cashe.removeFirst());
 
     }
 
     @Test
-    public void testAdded2(){
-        Map<String, LRUCashe.Node> map=lruCashe1.map;
+    public void testRefresh() {
+        LRUCashe cashe = new LRUCashe(4);
+        cashe.put("a", "A");
+        cashe.put("b", "B");
+        cashe.put("c", "C");
+        cashe.put("d", "D");
+        cashe.put("a", "AA");
+        cashe.put("e", "E");
 
-        // refresh from first by put
-        lruCashe1.putNod("aa",null);//bb,cc,aa
-        assert (map.containsKey("bb")&&map.containsKey("cc")&&map.containsKey("aa"));
-        lruCashe1.putNod("zz",null);//bb,cc,aa,zz
-        assert (map.containsKey("bb")&&map.containsKey("cc")&&map.containsKey("aa")&&map.containsKey("zz"));
-        // refresh from first by get
-        lruCashe1.getNod("cc");//bb,aa,zz,cc
-        assert (map.containsKey("bb")&&map.containsKey("aa")&&map.containsKey("zz")&&map.containsKey("cc"));
-        //put the same
-        lruCashe1.putNod("xx",null);//aa,zz,cc,xx
-        assert (map.containsKey("aa")&&map.containsKey("zz")&&map.containsKey("cc")&&map.containsKey("xx"));
-        lruCashe1.putNod("xx",null);//aa,zz,cc,xx
-        //get the last
-        lruCashe1.getNod("xx");
-        lruCashe1.getNod("xx");
-
-        assert (map.containsKey("aa")&&map.containsKey("zz")&&map.containsKey("cc")&&map.containsKey("xx"));
-        lruCashe1.putNod("uu",null);//zz,cc,xx,uu
-        lruCashe1.putNod("vv",null);//cc,xx,uu,vv
-        assert (map.containsKey("cc")&&map.containsKey("xx")&&map.containsKey("uu")&&map.containsKey("vv"));
-
-        //refresh from mid by get
-        lruCashe1.getNod("uu");//cc,xx,vv,uu
-        assert (map.containsKey("cc")&&map.containsKey("xx")&&map.containsKey("vv")&&map.containsKey("uu"));
-        lruCashe1.putNod("ii",null);//xx,vv,uu,ii
-        assert (map.containsKey("xx")&&map.containsKey("vv")&&map.containsKey("uu")&&map.containsKey("ii"));
-        lruCashe1.putNod("mm",null);//vv,uu,ii,mm
-        assert (map.containsKey("vv")&&map.containsKey("uu")&&map.containsKey("ii")&&map.containsKey("mm"));
-
-        assert (map.containsKey("vv")&&map.containsKey("uu")&&map.containsKey("ii")&&map.containsKey("mm"));
-
-        lruCashe1.putNod("hh",null);//uu,ii,mm,hh
-        assert (map.containsKey("uu"));
-        assert (map.containsKey("ii"));
-        assert (map.containsKey("mm"));
-        assert (map.containsKey("hh"));
-        //refresh from mid by put
-        lruCashe1.putNod("mm",null);//uu,ii,hh,mm
-        lruCashe1.putNod("jj",null);//ii,hh,mm,jj
-        lruCashe1.putNod("pp",null);//hh,mm,jj,pp
-        assert (map.containsKey("hh")&&map.containsKey("mm")&&map.containsKey("jj")&&map.containsKey("pp"));
-        lruCashe1.putNod("nn",null);//mm,jj,pp,nn
-        assert (map.containsKey("mm")&&map.containsKey("jj")&&map.containsKey("pp")&&map.containsKey("nn"));
+        assertEquals(null, cashe.get("b"));
+        assertEquals("C", cashe.removeFirst());
+        assertEquals("D", cashe.removeFirst());
+        assertEquals("AA", cashe.removeFirst());
+        assertEquals("E", cashe.removeFirst());
+        assertEquals(null, cashe.removeFirst());
+        assertEquals(null, cashe.removeFirst());
 
 
     }
 
+    @Test
+    public void testRefresh2() {
+        LRUCashe cashe = new LRUCashe(4);
+        cashe.put("a", "A");
+        cashe.put("b", "B");
+        cashe.put("c", "C");
+        cashe.put("d", "D");
+        cashe.get("b");
+
+        assertEquals("A", cashe.removeFirst());
+        assertEquals("C", cashe.removeFirst());
+        assertEquals("D", cashe.removeFirst());
+        assertEquals("B", cashe.removeFirst());
+
+
+    }
+
+    @Test
+    public void testPutNull() {
+        LRUCashe cashe = new LRUCashe(4);
+        cashe.put("a", "A");
+        cashe.put("b", "B");
+        cashe.put(null, null);
+        cashe.put(null, "C");
+
+        assertEquals("A", cashe.removeFirst());
+        assertEquals("B", cashe.removeFirst());
+        assertEquals(null, cashe.removeFirst());
+
+    }
 
 
 }
