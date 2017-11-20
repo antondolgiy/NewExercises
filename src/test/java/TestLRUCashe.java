@@ -13,7 +13,6 @@ public class TestLRUCashe {
 
 
     @Test
-
     public void testPut() {
         LRUCashe cashe = new LRUCashe(4);
         cashe.put("a", "A");
@@ -37,6 +36,7 @@ public class TestLRUCashe {
 
     }
 
+    @Test
     public void testRemove() {
         LRUCashe cashe = new LRUCashe(4);
         cashe.put("a", "A");

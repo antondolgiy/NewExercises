@@ -109,7 +109,7 @@ public class LRUCashe<K, V> {
             }
         }
         else {
-            System.out.println("don't put value with null key");
+            System.out.println("don't put value with null key!");
         }
     }
 
