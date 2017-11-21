@@ -37,7 +37,7 @@ public class LRUCashe<K, V> {
     }
 
     public void put(K key, V value) {
-        if(key!=null) {
+        if (key != null) {
             if (map.size() == 0) {
                 Node nod = new Node(null, key, value, null);
                 map.put(key, nod);
@@ -107,8 +107,7 @@ public class LRUCashe<K, V> {
                 }
 
             }
-        }
-        else {
+        } else {
             System.out.println("don't put value with null key!");
         }
     }
@@ -160,7 +159,7 @@ public class LRUCashe<K, V> {
             map.remove(first.key);
             first = first.next;
             first.previous = null;
-        } else if (first != null&&first == last) {
+        } else if (first != null && first == last) {
             result = first.value;
             map.remove(first.key);
             first.value = null;
@@ -171,8 +170,6 @@ public class LRUCashe<K, V> {
 
         return result;
     }
-
-
 
 
 }

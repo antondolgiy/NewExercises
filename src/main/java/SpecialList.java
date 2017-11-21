@@ -60,15 +60,6 @@ public class SpecialList<T> {
         }
     }
 
-    public static SpecialList reverseList(SpecialList list) {
-        SpecialList list1 = new SpecialList();
-        while (list.size > 0) {
-            list1.addElement(list.removeLast());
-        }
-
-        return list1;
-    }
-
     private void printAllNodeElement(Node node) {
         if (node.previous == null) System.out.println(node.element);
         if (node.next != null) {
