@@ -19,7 +19,7 @@ public class TestRunner {
         for (Failure failure: result1.getFailures()){
             System.out.println(failure.toString());
         }
-        System.out.println(result.wasSuccessful());
+        System.out.println(result1.wasSuccessful());
 
     }
 

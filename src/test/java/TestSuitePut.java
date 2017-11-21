@@ -8,6 +8,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
         TestLRUCashe.class,
         TestLRUCashe5.class
+
 })
 
 public class TestSuitePut {

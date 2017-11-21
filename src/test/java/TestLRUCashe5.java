@@ -12,7 +12,7 @@ public class TestLRUCashe5 {
         cashe.put(null, "C");
 
         assertEquals("A", cashe.removeFirst());
-        assertEquals("B", cashe.removeFirst());
+        assertEquals("Bv", cashe.removeFirst());
         assertEquals(null, cashe.removeFirst());
 
     }
