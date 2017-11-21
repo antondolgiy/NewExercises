@@ -13,13 +13,13 @@ public class TestRunner {
         for (Failure failure: result.getFailures()){
             System.out.println(failure.toString());
         }
-        System.out.println(result.wasSuccessful());
+        System.out.println("refresh test passed:"+result.wasSuccessful());
 
         Result result1=JUnitCore.runClasses(TestSuitePut.class);
         for (Failure failure: result1.getFailures()){
             System.out.println(failure.toString());
         }
-        System.out.println(result1.wasSuccessful());
+        System.out.println("put test passed:"+result1.wasSuccessful());
 
     }
 
