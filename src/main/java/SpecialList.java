@@ -103,6 +103,7 @@ public class SpecialList<T> {
     }
 
     public void printAllvalues() {
+
         printAllNodeElement(head);
     }
 
