@@ -1,4 +1,3 @@
-import org.junit.Assert;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -27,7 +26,7 @@ public class TestReverseSpecialList {
         for (String s:original){
             specialList.addElement(s);
         }
-        specialList.swapAll();
+        specialList.reverse();
         for (int i = 0; i <original.size(); i++) {
             assertEquals(original.get(i),specialList.removeLast());
         }
@@ -40,7 +39,7 @@ public class TestReverseSpecialList {
         for (String s:original){
             specialList.addElement(s);
         }
-        specialList.swapAll();
+        specialList.reverse();
         for (int i = 0; i <original.size(); i++) {
             assertEquals(original.get(i),specialList.removeLast());
         }
@@ -53,7 +52,7 @@ public class TestReverseSpecialList {
         for (String s:original){
             specialList.addElement(s);
         }
-        specialList.swapAll();
+        specialList.reverse();
         for (int i = 0; i <original.size(); i++) {
             assertEquals(original.get(i),specialList.removeLast());
         }
