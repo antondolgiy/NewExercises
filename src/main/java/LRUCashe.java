@@ -49,7 +49,7 @@ public class LRUCashe<K, V> {
                     Node refreshed = map.get(key);
                     if (refreshed == last) {
 
-                        refreshed.value = value;
+                 //       refreshed.value = value;
 
 
                     } else if (refreshed == first) {

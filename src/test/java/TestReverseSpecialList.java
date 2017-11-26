@@ -31,7 +31,32 @@ public class TestReverseSpecialList {
         for (int i = 0; i <original.size(); i++) {
             assertEquals(original.get(i),specialList.removeLast());
         }
+    }
 
+    @Test
+    public void testReverseSize2(){
+        ArrayList<String> original =new ArrayList<String>(Arrays.asList("a","b"));
+        SpecialList<String>specialList=new SpecialList<String>();
+        for (String s:original){
+            specialList.addElement(s);
+        }
+        specialList.swapAll();
+        for (int i = 0; i <original.size(); i++) {
+            assertEquals(original.get(i),specialList.removeLast());
+        }
+    }
+
+    @Test
+    public void testReverseSize3(){
+        ArrayList<String> original =new ArrayList<String>(Arrays.asList("a","b", "c"));
+        SpecialList<String>specialList=new SpecialList<String>();
+        for (String s:original){
+            specialList.addElement(s);
+        }
+        specialList.swapAll();
+        for (int i = 0; i <original.size(); i++) {
+            assertEquals(original.get(i),specialList.removeLast());
+        }
     }
 
 }

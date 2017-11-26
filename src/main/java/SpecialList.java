@@ -72,16 +72,13 @@ public class SpecialList<T> {
     }
 
     private void SwapAllNodeElement(Node node) {
-
         if (node.next != null) {
             Node shadow = node.previous;
             if (shadow == null) {
-
                 tail = node;
             } else {
                 if (shadow != null) {
-                    Node temp = null;
-                    temp = shadow.next;
+                    Node temp = node;
                     shadow.next = shadow.previous;
                     shadow.previous = temp;
                 }
@@ -91,14 +88,11 @@ public class SpecialList<T> {
             SwapAllNodeElement(node);
         } else {
             Node shadow = node.previous;
-            Node temp = null;
-            temp = shadow.next;
             shadow.next = shadow.previous;
-            shadow.previous = temp;
+            shadow.previous = node;
             node.next = shadow;
             node.previous = null;
             head = node;
-
         }
     }
 
