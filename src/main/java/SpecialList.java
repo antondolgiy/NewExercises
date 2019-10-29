@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
  */
 
 public class SpecialList<T> {
-    int size = 0;
+    private int size = 0;
     private Node head = null;
     private Node tail = null;
 
@@ -19,6 +19,10 @@ public class SpecialList<T> {
             this.element = element;
         }
 
+    }
+
+    public int size(){
+        return size;
     }
 
     public T removeLast() {
@@ -71,43 +75,38 @@ public class SpecialList<T> {
 
     }
 
-    private void SwapAllNodeElement(Node node) {
-
+    private void ReverseAllNodeElement(Node node) {
         if (node.next != null) {
             Node shadow = node.previous;
             if (shadow == null) {
-
                 tail = node;
             } else {
                 if (shadow != null) {
-                    Node temp = null;
-                    temp = shadow.next;
+                    Node temp = node;
                     shadow.next = shadow.previous;
                     shadow.previous = temp;
                 }
 
             }
             node = node.next;
-            SwapAllNodeElement(node);
+            ReverseAllNodeElement(node);
         } else {
             Node shadow = node.previous;
-            Node temp = null;
-            temp = shadow.next;
             shadow.next = shadow.previous;
-            shadow.previous = temp;
+            shadow.previous = node;
             node.next = shadow;
             node.previous = null;
             head = node;
-
         }
     }
 
     public void printAllvalues() {
+
         printAllNodeElement(head);
     }
 
-    public void swapAll() {
-        SwapAllNodeElement(head);
+    public void reverse() {
+        ReverseAllNodeElement(head);
 
     }
 
@@ -122,7 +121,7 @@ public class SpecialList<T> {
         list.printAllvalues();
         System.out.println("************");
 
-        list.swapAll();
+        list.reverse();
 
         System.out.println("************");
 
